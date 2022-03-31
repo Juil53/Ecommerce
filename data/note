@@ -1,0 +1,34 @@
+const express = require("express");
+const app = express();
+const mysql = require("mysql");
+
+app.listen(3000, () => {
+  console.log("Node server running localhost:3000");
+});
+app.get("/", (req, res) => {
+  let sql = "SELECT * FROM users";
+  connection.query(sql, (err, response, fields) => {
+    if (err) throw err;
+    const result = JSON.parse(JSON.stringify(response))
+    console.log("🚀 ~ file: server.js ~ line 14 ~ connection.query ~ result", result)
+    res.json(result);
+  });
+});
+
+//Ket noi MySQL
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "43253245",
+  database: "ecommerce",
+  port: "3306",
+});
+//Connect toi DB myproject
+connection.connect((err) => {
+  if (err) {
+    throw err;
+  } else {
+    console.log("Connected");
+  }
+});
+//Get DATA từ Table users
