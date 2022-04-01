@@ -1,31 +1,20 @@
 // const { Users } = require("../models/index");
-// let userList = [
-//   {
-//     id: 1,
-//     fullName: "Hoang Phan",
-//     email: "hoangphan@gmail.com",
-//     password: "1234",
-//   },
-//   {
-//     id: 2,
-//     fullName: "Thuy Le",
-//     email: "thuyle@gmail.com",
-//     password: "1234",
-//   },
-// ];
-
 const mysql = require("mysql");
 const config = require("../config/mysql.config");
 let connection = mysql.createConnection(config);
 const getList = async () => {
   let sql = "SELECT * FROM user";
-  await connection.query(sql, (error, result) => {
-    if (error) throw error;
-    console.log(result);
-    return result;
+  return new Promise((resolve, reject) => {
+      connection.query(sql, (err, result) => {
+          if (err) {
+              return reject(err);
+          }
+          resolve(result);
+      });
   });
 };
-
+// const listUser = getList();
+// console.log("listUser",listUser)
 // const getDetail = (id) => {
 //   const index = userList.findIndex((user) => {
 //     return user.id === id;
@@ -72,6 +61,7 @@ const getList = async () => {
 
 module.exports = {
   getList,
+
   //   getDetail,
   //   createUser,
   //   updateUser,

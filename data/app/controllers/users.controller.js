@@ -1,20 +1,19 @@
 const {
   getList,
+  listUser,
   //   getDetail,
   //   createUser,
   //   updateUser,
   //   deleteUser,
 } = require("../services/users.services");
-
+const mysql = require("mysql");
+const config = require("../config/mysql.config");
+let connection = mysql.createConnection(config);
 const getUserList = async (req, res) => {
-  const userList = await getList();
-  console.log("controller", userList);
 
-  if (userList) {
-    res.status(200).send(userList);
-  } else {
-    res.status(404).send("Not found");
-  }
+  const users = await getList()
+  res.status(200).send(users)
+  
 };
 
 // const getUserDetail = (req, res) => {
@@ -58,7 +57,7 @@ const getUserList = async (req, res) => {
 module.exports = {
   getUserList,
   //   getUserDetail,
-  //   createUsers,
+  // createUsers,
   //   updateUsers,
   //   deleteUsers,
 };

@@ -21,7 +21,7 @@ userRoute.get("/users", getUserList);
 //   const id = params.id;
 // });
 
-// Them san pham
+// Them nguoi dung
 userRoute.post("/users", (req, res) => {
   let newUser = req.body;
   connection.query("INSERT INTO user SET ?", newUser, (error, data) => {
